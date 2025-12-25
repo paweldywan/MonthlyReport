@@ -63,7 +63,7 @@ MonthlyReport/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/paweld139/MonthlyReport.git
+   git clone https://github.com/paweldywan/MonthlyReport.git
    cd MonthlyReport
    ```
 
@@ -203,7 +203,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Pawel Dywan**
 - Website: [paweldywan.com](https://paweldywan.com/)
-- GitHub: [@paweld139](https://github.com/paweld139)
+- GitHub: [@paweldywan](https://github.com/paweldywan)
 
 ## Acknowledgments
 
