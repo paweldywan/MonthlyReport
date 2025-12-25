@@ -201,7 +201,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-**Pawe? Dywan**
+**Pawel Dywan**
 - Website: [paweldywan.com](https://monthlyreport.paweldywan.com/)
 - GitHub: [@paweld139](https://github.com/paweld139)
 
