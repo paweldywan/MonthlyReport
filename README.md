@@ -2,15 +2,15 @@
 
 A full-stack web application for tracking, managing, and exporting monthly work reports with comprehensive authentication and multiple export formats.
 
-?? **[Live Application](https://monthlyreport.paweldywan.com/)**
+**[Live Application](https://monthlyreport.paweldywan.com/)**
 
 ---
 
-## ?? Overview
+## Overview
 
 MonthlyReport is a modern web application built with .NET 9 and React that enables users to track their work hours, manage time entries, and export reports in various formats. The application features user authentication, data persistence with PostgreSQL, and flexible export capabilities.
 
-## ? Key Features
+## Key Features
 
 - **User Authentication**: Secure user registration, login, and account management with ASP.NET Core Identity
 - **Time Entry Management**: Create, read, update, and delete work time entries
@@ -20,37 +20,38 @@ MonthlyReport is a modern web application built with .NET 9 and React that enabl
 - **RESTful API**: Clean API design with Swagger documentation
 - **Database Migrations**: Entity Framework Core with PostgreSQL support
 
-## ??? Architecture
+## Architecture
 
 The solution follows a clean, layered architecture:
 
 ```
 MonthlyReport/
-??? MonthlyReport.Server/       # ASP.NET Core Web API + Razor Pages
-?   ??? Controllers/            # API endpoints (Entry, Export, Account)
-?   ??? Areas/Identity/         # Authentication pages
-?   ??? Services/               # Template services
-?   ??? Views/Templates/        # Razor templates for exports
-?
-??? MonthlyReport.BLL/          # Business Logic Layer
-?   ??? Services/               # Business services (Entry, Export, HtmlToPdf)
-?   ??? Interfaces/             # Service contracts
-?   ??? Models/                 # DTOs and view models
-?   ??? Enums/                  # Export types, sort direction
-?   ??? Extensions/             # Helper extensions
-?
-??? MonthlyReport.DAL/          # Data Access Layer
-?   ??? Entities/               # EF Core entities
-?   ??? Migrations/             # Database migrations
-?   ??? MonthlyReportContext.cs # DbContext
-?   ??? MonthlyReportSeeder.cs  # Database seeding
-?
-??? monthlyreport.client/       # React + TypeScript Frontend
-    ??? src/                    # React components and logic
-    ??? package.json            # Node dependencies
+|
++-- MonthlyReport.Server/       # ASP.NET Core Web API + Razor Pages
+|   +-- Controllers/            # API endpoints (Entry, Export, Account)
+|   +-- Areas/Identity/         # Authentication pages
+|   +-- Services/               # Template services
+|   +-- Views/Templates/        # Razor templates for exports
+|
++-- MonthlyReport.BLL/          # Business Logic Layer
+|   +-- Services/               # Business services (Entry, Export, HtmlToPdf)
+|   +-- Interfaces/             # Service contracts
+|   +-- Models/                 # DTOs and view models
+|   +-- Enums/                  # Export types, sort direction
+|   +-- Extensions/             # Helper extensions
+|
++-- MonthlyReport.DAL/          # Data Access Layer
+|   +-- Entities/               # EF Core entities
+|   +-- Migrations/             # Database migrations
+|   +-- MonthlyReportContext.cs # DbContext
+|   +-- MonthlyReportSeeder.cs  # Database seeding
+|
++-- monthlyreport.client/       # React + TypeScript Frontend
+    +-- src/                    # React components and logic
+    +-- package.json            # Node dependencies
 ```
 
-## ?? Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -130,7 +131,7 @@ cd ..
 dotnet run --project MonthlyReport.Server --configuration Release
 ```
 
-## ?? Technology Stack
+## Technology Stack
 
 ### Backend
 - **.NET 9** - Web framework
@@ -153,7 +154,7 @@ dotnet run --project MonthlyReport.Server --configuration Release
 - **Font Awesome** - Icons
 - **Moment.js** - Date handling
 
-## ?? API Documentation
+## API Documentation
 
 When running in development mode, access the Swagger UI at:
 ```
@@ -174,7 +175,7 @@ https://localhost:7118/swagger
 - **Account**
   - Identity endpoints for authentication and account management
 
-## ??? Database Schema
+## Database Schema
 
 **Entry Table**
 - `Id` - Primary key
@@ -184,7 +185,7 @@ https://localhost:7118/swagger
 - `UserId` - Foreign key to AspNetUsers
 - Additional fields for work description, project, etc.
 
-## ?? Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -194,17 +195,17 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## ?? License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## ?? Author
+## Author
 
 **Pawe? Dywan**
 - Website: [paweldywan.com](https://monthlyreport.paweldywan.com/)
 - GitHub: [@paweld139](https://github.com/paweld139)
 
-## ?? Acknowledgments
+## Acknowledgments
 
 - Built with ASP.NET Core and React
 - Uses modern .NET 9 features
