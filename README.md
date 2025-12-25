@@ -2,7 +2,11 @@
 
 A full-stack web application for tracking, managing, and exporting monthly work reports with comprehensive authentication and multiple export formats.
 
-**[Live Application](https://monthlyreport.paweldywan.com/)**
+---
+
+## Live Application
+
+**https://monthlyreport.paweldywan.com/**
 
 ---
 
