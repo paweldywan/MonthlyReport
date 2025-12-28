@@ -110,7 +110,7 @@ namespace MonthlyReport.Server
 
             services.AddSwaggerGen();
 
-            services.AddAutoMapper(typeof(MonthlyReportMappingProfile).Assembly);
+            services.AddAutoMapper(c => c.AddMaps(typeof(MonthlyReportMappingProfile).Assembly));
 
             await hostEnvironment.PreparePuppeteerAsync();
 
