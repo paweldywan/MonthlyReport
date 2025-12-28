@@ -6,12 +6,11 @@ import {
     FormControl,
     InputLabel,
     Select,
-    SelectChangeEvent
+    SelectChangeEvent,
+    FormHelperText
 } from "@mui/material";
 
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
-import AppInputError from "./AppInputError";
 
 import {
     useMemo
@@ -69,85 +68,68 @@ const AppInput = <T,>({
         });
     }, [data, setData, property, type]);
 
+    const errorMessage = useMemo(() => errors?.[property.toString()], [errors, property]);
+
     if (options && options.length > 0) {
         return (
-            <>
-                <FormControl fullWidth>
-                    <InputLabel id={`${id}-label`}>{label}</InputLabel>
-                    <Select
-                        labelId={`${id}-label`}
-                        id={id}
-                        value={String(value)}
-                        label={label}
-                        onChange={onChange}
-                        required={required}
-                    >
-                        {options.map((option, index) => (
-                            <MenuItem key={index} value={option}>
-                                {option}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-
-                {errors &&
-                    <AppInputError
-                        errors={errors}
-                        property={property.toString()}
-                    />}
-            </>
+            <FormControl fullWidth error={!!errorMessage}>
+                <InputLabel id={`${id}-label`}>{label}</InputLabel>
+                <Select
+                    labelId={`${id}-label`}
+                    id={id}
+                    value={String(value)}
+                    label={label}
+                    onChange={onChange}
+                    required={required}
+                >
+                    {options.map((option, index) => (
+                        <MenuItem key={index} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
+                {errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}
+            </FormControl>
         );
     }
 
     if (type === 'datetime-local') {
         return (
-            <>
-                <DateTimePicker
-                    label={label}
-                    value={value as Date}
-                    onChange={newValue =>
-                        setData({
-                            ...data,
-                            [property]: newValue
-                        })}
-                    slotProps={{
-                        textField: {
-                            fullWidth: true,
-                            required: required,
-                            id: id,
-                            name: label && property.toString()
-                        }
-                    }}
-                />
-
-                {errors &&
-                    <AppInputError
-                        errors={errors}
-                        property={property.toString()}
-                    />}
-            </>
+            <DateTimePicker
+                label={label}
+                value={value as Date}
+                onChange={newValue =>
+                    setData({
+                        ...data,
+                        [property]: newValue
+                    })}
+                slotProps={{
+                    textField: {
+                        fullWidth: true,
+                        required: required,
+                        id: id,
+                        name: label && property.toString(),
+                        error: !!errorMessage,
+                        helperText: errorMessage
+                    }
+                }}
+            />
         );
     }
 
     return (
-        <>
-            <TextField
-                type={type}
-                name={label && property.toString()}
-                id={id}
-                label={label}
-                required={required}
-                value={value}
-                onChange={onChange}
-                fullWidth
-            />
-
-            {errors &&
-                <AppInputError
-                    errors={errors}
-                    property={property.toString()}
-                />}
-        </>
+        <TextField
+            type={type}
+            name={label && property.toString()}
+            id={id}
+            label={label}
+            required={required}
+            value={value}
+            onChange={onChange}
+            fullWidth
+            error={!!errorMessage}
+            helperText={errorMessage}
+        />
     );
 };
 
