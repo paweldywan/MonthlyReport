@@ -113,7 +113,7 @@ const AppTable = <T,>({
                     {columns.map(column =>
                         <th
                             key={column.property.toString()}
-                            role={canSort(column) ? 'button' : undefined}
+                            {...(canSort(column) && { role: 'button' })}
                             onClick={canSort(column) ? () =>
                                 setSort!({
                                     property: column.property,
