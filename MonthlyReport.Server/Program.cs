@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MonthlyReport.BLL.Extensions;
 using MonthlyReport.BLL.Interfaces;
 using MonthlyReport.BLL.Services;
+using MonthlyReport.BLL.Services.Exporters;
 using MonthlyReport.DAL;
 using MonthlyReport.Server.Services;
 using System.Text.Json.Serialization;
@@ -119,11 +120,27 @@ namespace MonthlyReport.Server
 
             services.AddScoped<IEntryService, EntryService>();
 
+            services.AddScoped<IExporterFactory, ExporterFactory>();
+
             services.AddScoped<IExportService, ExportService>();
+
+            AddExporters(services);
 
             services.AddScoped<ITemplateService, RazorViewsTemplateService>();
 
             services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
+        }
+
+        private static void AddExporters(IServiceCollection services)
+        {
+            services.AddTransient<XlsxExporter>();
+            services.AddTransient<XlsExporter>();
+            services.AddTransient<CsvExporter>();
+            services.AddTransient<PdfExporter>();
+            services.AddTransient<HtmlExporter>();
+            services.AddTransient<JsonExporter>();
+            services.AddTransient<XmlExporter>();
+            services.AddTransient<TxtExporter>();
         }
 
         private static void AddMiddlewares(WebApplication app)
