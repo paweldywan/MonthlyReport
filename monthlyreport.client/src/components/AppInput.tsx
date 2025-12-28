@@ -45,7 +45,7 @@ const AppInput = <T,>({
     const value = useMemo(() => {
         switch (type) {
             case 'datetime-local':
-                return data[property] as Date;
+                return moment(data[property] as Date).toDate();
             default:
                 return String(data[property]);
         }
@@ -55,9 +55,6 @@ const AppInput = <T,>({
         let value;
 
         switch (type) {
-            case 'datetime-local':
-                value = moment(event.target.value).toDate();
-                break;
             case 'number':
                 value = Number(event.target.value);
                 break;
@@ -108,14 +105,11 @@ const AppInput = <T,>({
                 <DateTimePicker
                     label={label}
                     value={value as Date}
-                    onChange={(newValue) => {
-                        if (newValue) {
-                            setData({
-                                ...data,
-                                [property]: newValue
-                            });
-                        }
-                    }}
+                    onChange={newValue =>
+                        setData({
+                            ...data,
+                            [property]: newValue
+                        })}
                     slotProps={{
                         textField: {
                             fullWidth: true,
