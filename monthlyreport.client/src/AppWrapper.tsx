@@ -5,6 +5,9 @@ import {
     useMediaQuery
 } from '@mui/material';
 
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
 import App from './App';
 
 function AppWrapper() {
@@ -19,7 +22,9 @@ function AppWrapper() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <App />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <App />
+            </LocalizationProvider>
         </ThemeProvider>
     );
 }

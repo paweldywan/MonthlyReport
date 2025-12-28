@@ -9,6 +9,8 @@ import {
     SelectChangeEvent
 } from "@mui/material";
 
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
 import AppInputError from "./AppInputError";
 
 import {
@@ -43,7 +45,7 @@ const AppInput = <T,>({
     const value = useMemo(() => {
         switch (type) {
             case 'datetime-local':
-                return moment(data[property] as Date).format('YYYY-MM-DDTHH:mm');
+                return data[property] as Date;
             default:
                 return String(data[property]);
         }
@@ -78,7 +80,7 @@ const AppInput = <T,>({
                     <Select
                         labelId={`${id}-label`}
                         id={id}
-                        value={value}
+                        value={String(value)}
                         label={label}
                         onChange={onChange}
                         required={required}
@@ -100,6 +102,39 @@ const AppInput = <T,>({
         );
     }
 
+    if (type === 'datetime-local') {
+        return (
+            <>
+                <DateTimePicker
+                    label={label}
+                    value={value as Date}
+                    onChange={(newValue) => {
+                        if (newValue) {
+                            setData({
+                                ...data,
+                                [property]: newValue
+                            });
+                        }
+                    }}
+                    slotProps={{
+                        textField: {
+                            fullWidth: true,
+                            required: required,
+                            id: id,
+                            name: label && property.toString()
+                        }
+                    }}
+                />
+
+                {errors &&
+                    <AppInputError
+                        errors={errors}
+                        property={property.toString()}
+                    />}
+            </>
+        );
+    }
+
     return (
         <>
             <TextField
@@ -111,7 +146,6 @@ const AppInput = <T,>({
                 value={value}
                 onChange={onChange}
                 fullWidth
-                slotProps={type === 'datetime-local' ? { inputLabel: { shrink: true } } : undefined}
             />
 
             {errors &&
