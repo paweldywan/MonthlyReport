@@ -27,7 +27,7 @@ import {
 
 import {
     Container
-} from 'reactstrap';
+} from '@mui/material';
 
 import AppTable from './components/AppTable';
 
@@ -311,7 +311,7 @@ function App() {
             />
 
             <Container
-                fluid
+                maxWidth={false}
             >
                 <AppAccordion
                     className="mb-2"

@@ -5,10 +5,12 @@ import {
 
 import {
     Accordion,
-    AccordionBody,
-    AccordionHeader,
-    AccordionItem
-} from "reactstrap";
+    AccordionSummary,
+    AccordionDetails,
+    Typography
+} from "@mui/material";
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
     AppAccordionItem
@@ -25,42 +27,34 @@ const AppAccordion = ({
     items,
     defaultOpen = ''
 }: Props) => {
-    const [open, setOpen] = useState(defaultOpen);
+    const [expanded, setExpanded] = useState<string>(defaultOpen);
 
-    const toggle = useCallback((id: string) => {
-        if (open === id) {
-            setOpen('');
-        }
-        else {
-            setOpen(id);
-        }
-    }, [open]);
+    const handleChange = useCallback((panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+        setExpanded(isExpanded ? panel : '');
+    }, []);
 
     return (
-        <Accordion
-            toggle={toggle}
-            open={open}
-            className={className}
-        >
+        <div className={className}>
             {items.map((item, index) => (
-                <AccordionItem
+                <Accordion
                     key={index}
-                    id={index.toString()}
+                    expanded={expanded === index.toString()}
+                    onChange={handleChange(index.toString())}
                 >
-                    <AccordionHeader
-                        targetId={index.toString()}
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls={`panel${index}-content`}
+                        id={`panel${index}-header`}
                     >
-                        {item.header}
-                    </AccordionHeader>
+                        <Typography>{item.header}</Typography>
+                    </AccordionSummary>
 
-                    <AccordionBody
-                        accordionId={index.toString()}
-                    >
+                    <AccordionDetails>
                         {item.body}
-                    </AccordionBody>
-                </AccordionItem>
+                    </AccordionDetails>
+                </Accordion>
             ))}
-        </Accordion>
+        </div>
     );
 };
 

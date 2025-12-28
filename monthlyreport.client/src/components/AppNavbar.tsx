@@ -1,9 +1,9 @@
 import {
-    Navbar,
-    NavbarBrand,
-    NavbarText,
+    AppBar,
+    Toolbar,
+    Typography,
     Button
-} from "reactstrap";
+} from "@mui/material";
 
 interface Props {
     title: string;
@@ -19,20 +19,24 @@ const AppNavbar = ({
     buttonOnClick
 }: Props) => {
     return (
-        <Navbar>
-            <NavbarBrand>{title}</NavbarBrand>
+        <AppBar position="static" sx={{ mb: 2 }}>
+            <Toolbar>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    {title}
+                </Typography>
 
-            <NavbarText className="d-flex align-items-center">
-                {text}
+                <Typography variant="body1" component="span" sx={{ mr: 2 }}>
+                    {text}
+                </Typography>
 
                 <Button
-                    color="link"
+                    color="inherit"
                     onClick={buttonOnClick}
                 >
                     {buttonText}
                 </Button>
-            </NavbarText>
-        </Navbar>
+            </Toolbar>
+        </AppBar>
     );
 };
 

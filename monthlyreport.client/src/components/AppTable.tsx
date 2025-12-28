@@ -10,10 +10,15 @@ import {
 
 import {
     Button,
-    Col,
-    Row,
-    Table
-} from 'reactstrap';
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Box
+} from '@mui/material';
 
 import {
     useCallback,
@@ -78,7 +83,7 @@ const AppTable = <T,>({
                     setEditedRow(row);
                 }
             },
-            color: row => editable(row, editedRow) ? 'danger' : 'primary'
+            color: row => editable(row, editedRow) ? 'error' : 'primary'
         },
         {
             icon: () => faCheck as IconProp,
@@ -107,77 +112,76 @@ const AppTable = <T,>({
     const canSort = useCallback((column: TableColumn<T>) => column.sortable && sort && setSort, [setSort, sort]);
 
     return (
-        <Table>
-            <thead>
-                <tr>
-                    {columns.map(column =>
-                        <th
-                            key={column.property.toString()}
-                            role={canSort(column) ? 'button' : undefined}
-                            onClick={canSort(column) ? () =>
-                                setSort!({
-                                    property: column.property,
-                                    direction: sort!.property === column.property && sort!.direction === 'asc' ? 'desc' :
-                                        sort!.direction === 'desc' ? undefined : 'asc'
-                                }) : undefined}
-                        >
-                            {column.label}
-                            {" "}
-                            {canSort(column) && sort!.property === column.property && sort!.direction &&
-                                <FontAwesomeIcon icon={sort!.direction == 'asc' ? faChevronUp as IconProp : faChevronDown as IconProp} />}
-                        </th>
-                    )}
-                    {actions && actions.length &&
-                        <th>Actions</th>
-                    }
-                </tr>
-            </thead>
-
-            <tbody>
-                {data.map(item =>
-                    <tr key={String(item[rowKey])}>
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
                         {columns.map(column =>
-                            <td key={column.property.toString()}>
-                                {column.editable && column.editable(item, editedRow) && editedRow ?
-                                    <AppInput
-                                        type={column.type}
-                                        data={editedRow}
-                                        setData={setEditedRow}
-                                        property={column.property}
-                                        errors={errors}
-                                    /> :
-                                    column.formatter ? column.formatter(String(item[column.property])) : String(item[column.property])
-                                }
-                            </td>
+                            <TableCell
+                                key={column.property.toString()}
+                                sx={{ cursor: canSort(column) ? 'pointer' : 'default' }}
+                                onClick={canSort(column) ? () =>
+                                    setSort!({
+                                        property: column.property,
+                                        direction: sort!.property === column.property && sort!.direction === 'asc' ? 'desc' :
+                                            sort!.direction === 'desc' ? undefined : 'asc'
+                                    }) : undefined}
+                            >
+                                {column.label}
+                                {" "}
+                                {canSort(column) && sort!.property === column.property && sort!.direction &&
+                                    <FontAwesomeIcon icon={sort!.direction == 'asc' ? faChevronUp as IconProp : faChevronDown as IconProp} />}
+                            </TableCell>
                         )}
                         {actions && actions.length &&
-                            <td>
-                                <Row>
-                                    {[...actions, ...(defaultActions ?? [])]
-                                        .filter(action => !action.visible || action.visible(item))
-                                        .map(action =>
-                                            <Col
-                                                xs="auto"
-                                                key={action.title(item)}
-                                            >
+                            <TableCell>Actions</TableCell>
+                        }
+                    </TableRow>
+                </TableHead>
+
+                <TableBody>
+                    {data.map(item =>
+                        <TableRow key={String(item[rowKey])}>
+                            {columns.map(column =>
+                                <TableCell key={column.property.toString()}>
+                                    {column.editable && column.editable(item, editedRow) && editedRow ?
+                                        <AppInput
+                                            type={column.type}
+                                            data={editedRow}
+                                            setData={setEditedRow}
+                                            property={column.property}
+                                            errors={errors}
+                                        /> :
+                                        column.formatter ? column.formatter(String(item[column.property])) : String(item[column.property])
+                                    }
+                                </TableCell>
+                            )}
+                            {actions && actions.length &&
+                                <TableCell>
+                                    <Box sx={{ display: 'flex', gap: 1 }}>
+                                        {[...actions, ...(defaultActions ?? [])]
+                                            .filter(action => !action.visible || action.visible(item))
+                                            .map(action =>
                                                 <Button
+                                                    key={action.title(item)}
                                                     onClick={() => action.onClick(item)}
-                                                    color={action.color && action.color(item)}
-                                                    size="sm"
+                                                    color={(action.color && action.color(item)) as 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning' | undefined}
+                                                    size="small"
+                                                    variant="contained"
                                                 >
                                                     <FontAwesomeIcon
                                                         icon={action.icon(item)}
                                                     />
                                                 </Button>
-                                            </Col>
-                                        )}
-                                </Row>
-                            </td>
-                        }
-                    </tr>
-                )}
-            </tbody>
-        </Table >
+                                            )}
+                                    </Box>
+                                </TableCell>
+                            }
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table >
+        </TableContainer>
     );
 };
 

@@ -1,13 +1,13 @@
 import moment from "moment";
 
 import {
-    Input,
-    Label
-} from "reactstrap";
-
-import {
-    InputType
-} from "reactstrap/types/lib/Input";
+    TextField,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Select,
+    SelectChangeEvent
+} from "@mui/material";
 
 import AppInputError from "./AppInputError";
 
@@ -16,7 +16,7 @@ import {
 } from "react";
 
 interface Props<T> {
-    type?: InputType;
+    type?: string;
     idPrefix?: string;
     required?: boolean;
     options?: string[];
@@ -43,13 +43,13 @@ const AppInput = <T,>({
     const value = useMemo(() => {
         switch (type) {
             case 'datetime-local':
-                return moment(data[property] as Date).format('yyyy-MM-DDTHH:mm');
+                return moment(data[property] as Date).format('YYYY-MM-DDTHH:mm');
             default:
                 return String(data[property]);
         }
     }, [data, property, type]);
 
-    const onChange = useMemo(() => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = useMemo(() => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent) => {
         let value;
 
         switch (type) {
@@ -70,31 +70,49 @@ const AppInput = <T,>({
         });
     }, [data, setData, property, type]);
 
+    if (options && options.length > 0) {
+        return (
+            <>
+                <FormControl fullWidth>
+                    <InputLabel id={`${id}-label`}>{label}</InputLabel>
+                    <Select
+                        labelId={`${id}-label`}
+                        id={id}
+                        value={value}
+                        label={label}
+                        onChange={onChange}
+                        required={required}
+                    >
+                        {options.map((option, index) => (
+                            <MenuItem key={index} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                {errors &&
+                    <AppInputError
+                        errors={errors}
+                        property={property.toString()}
+                    />}
+            </>
+        );
+    }
+
     return (
         <>
-            {label &&
-                <Label
-                    for={id}
-                >
-                    {label}
-                </Label>}
-
-            <Input
+            <TextField
                 type={type}
                 name={label && property.toString()}
                 id={id}
+                label={label}
                 required={required}
                 value={value}
                 onChange={onChange}
-            >
-                {options?.map((option, index) => (
-                    <option
-                        key={index}
-                    >
-                        {option}
-                    </option>
-                ))}
-            </Input>
+                fullWidth
+                slotProps={type === 'datetime-local' ? { inputLabel: { shrink: true } } : undefined}
+            />
 
             {errors &&
                 <AppInputError

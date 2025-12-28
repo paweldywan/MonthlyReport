@@ -1,11 +1,9 @@
 import {
     Button,
-    Col,
-    Form,
-    FormGroup,
-    Row,
-    RowProps
-} from "reactstrap";
+    Box
+} from "@mui/material";
+
+import Grid from '@mui/material/Grid2';
 
 import {
     FormAction,
@@ -26,10 +24,10 @@ interface Props<T> {
     data: T;
     setData: (data: T) => void;
     inputs: FormInput<T>[];
-    rowProps: RowProps;
+    rowProps: { xl?: string, md?: string, sm?: string, xs?: string };
     onSubmit: () => Promise<void | Response>;
     buttonLabel?: string;
-    buttonColor?: string;
+    buttonColor?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning";
     actions?: FormAction[];
     idPrefix?: string;
 }
@@ -48,7 +46,8 @@ const AppForm = <T,>({
     const [errors, setErrors] = useState<Record<string, string>>();
 
     return (
-        <Form
+        <Box
+            component="form"
             onSubmit={async (event) => {
                 event.preventDefault();
 
@@ -66,12 +65,16 @@ const AppForm = <T,>({
                 }
             }}
         >
-            <Row
-                {...rowProps}
-            >
+            <Grid container spacing={2}>
                 {inputs.map((input, index) => (
-                    <FormGroup
+                    <Grid
                         key={index}
+                        size={{
+                            xl: Number(rowProps.xl) || 12,
+                            md: Number(rowProps.md) || 12,
+                            sm: Number(rowProps.sm) || 12,
+                            xs: Number(rowProps.xs) || 12
+                        }}
                     >
                         <AppInput
                             type={input.type}
@@ -84,37 +87,32 @@ const AppForm = <T,>({
                             label={input.label}
                             errors={errors}
                         />
-                    </FormGroup>
+                    </Grid>
                 ))}
-            </Row>
+            </Grid>
 
 
-            <Row>
-                <Col
-                    xs="auto"
+            <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color={buttonColor}
                 >
-                    <Button
-                        color={buttonColor}
-                    >
-                        {buttonLabel}
-                    </Button>
-                </Col>
+                    {buttonLabel}
+                </Button>
 
                 {actions?.map((action, index) =>
-                    <Col
+                    <Button
                         key={index}
-                        xs="auto"
+                        onClick={action.onClick}
+                        variant="contained"
+                        color={action.color as "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning"}
                     >
-                        <Button
-                            onClick={action.onClick}
-                            color={action.color}
-                        >
-                            {action.label}
-                        </Button>
-                    </Col>
+                        {action.label}
+                    </Button>
                 )}
-            </Row>
-        </Form>
+            </Box>
+        </Box>
     );
 };
 

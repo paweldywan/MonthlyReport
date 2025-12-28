@@ -5,11 +5,11 @@ import {
 
 import {
     Button,
-    Modal,
-    ModalBody,
-    ModalFooter,
-    ModalHeader
-} from "reactstrap";
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions
+} from "@mui/material";
 
 interface Props {
     header: string;
@@ -29,25 +29,24 @@ const AppModal = ({
     const toggle = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen]);
 
     return (
-        <Modal
-            isOpen={isOpen}
-            toggle={toggle}
+        <Dialog
+            open={isOpen}
+            onClose={toggle}
         >
-            <ModalHeader
-                toggle={toggle}
-            >
+            <DialogTitle>
                 {header}
-            </ModalHeader>
+            </DialogTitle>
 
-            <ModalBody>
+            <DialogContent>
                 {children}
-            </ModalBody>
+            </DialogContent>
 
             {onAccept &&
-                <ModalFooter>
+                <DialogActions>
                     <Button
-                        color="danger"
+                        color="error"
                         onClick={toggle}
+                        variant="contained"
                     >
                         No
                     </Button>
@@ -55,11 +54,12 @@ const AppModal = ({
                     <Button
                         color="primary"
                         onClick={onAccept}
+                        variant="contained"
                     >
                         Yes
                     </Button>
-                </ModalFooter>}
-        </Modal >
+                </DialogActions>}
+        </Dialog >
     );
 }
 
