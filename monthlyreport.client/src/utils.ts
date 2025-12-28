@@ -1,5 +1,3 @@
-export const setColorScheme = () => document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
 export const formatDate = (value: string) => new Date(value).toLocaleString();
 
 export const formatNumber = (value: string) => parseFloat(value).toLocaleString();

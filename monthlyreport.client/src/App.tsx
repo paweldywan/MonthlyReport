@@ -41,7 +41,6 @@ import {
     getEndOfCurrentMonth,
     getStartOfCurrentMonth,
     round,
-    setColorScheme,
     sumArrayProperty
 } from './utils';
 
@@ -167,8 +166,6 @@ function App() {
     ], [editable]);
 
     useEffect(() => {
-        setColorScheme();
-
         executeGetUserName();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -192,7 +189,7 @@ function App() {
                     }
                 });
             },
-            color: () => 'danger'
+            color: () => 'error'
         }
     ], [executeDeleteEntry, setIsConfirmationModalOpen]);
 

@@ -6,9 +6,7 @@ import {
     ReactNode
 } from "react";
 
-import {
-    InputType
-} from "reactstrap/types/lib/Input";
+export type InputType = 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'month' | 'week' | 'color' | 'file' | 'select';
 
 export interface TableColumn<T> {
     label: string;
