@@ -35,7 +35,7 @@ const ExportModal = <T,>({
     propertiesToSkip
 }: Props<T>) => {
     const [formData, setFormData] = useState<Export>({
-        exportType: ExportType.Xlsx
+        exportType: 'Xlsx'
     });
 
     const executeExport = useCallback(async () => {

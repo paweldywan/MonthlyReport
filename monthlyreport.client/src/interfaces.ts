@@ -81,7 +81,7 @@ export enum ExportType {
 }
 
 export interface Export {
-    exportType: ExportType;
+    exportType: keyof typeof ExportType;
 }
 
 export interface ExportColumn<T> {

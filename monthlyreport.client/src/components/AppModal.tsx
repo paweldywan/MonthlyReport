@@ -32,6 +32,7 @@ const AppModal = ({
         <Dialog
             open={isOpen}
             onClose={toggle}
+            disableRestoreFocus
         >
             <DialogTitle>
                 {header}

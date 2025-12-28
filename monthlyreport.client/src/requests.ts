@@ -45,7 +45,7 @@ export const deleteEntry = (id: number) =>
         method: 'DELETE'
     });
 
-export const exportData = async <T>(data: T[], columns: ExportColumn<T>[], propertiesToSkip: number, exportType: ExportType) => {
+export const exportData = async <T>(data: T[], columns: ExportColumn<T>[], propertiesToSkip: number, exportType: keyof typeof ExportType) => {
     const response = await fetch('/api/export', {
         method: 'POST',
         headers: {
@@ -55,7 +55,7 @@ export const exportData = async <T>(data: T[], columns: ExportColumn<T>[], prope
             data,
             columns,
             propertiesToSkip,
-            exportType
+            exportType: ExportType[exportType]
         })
     });
 
