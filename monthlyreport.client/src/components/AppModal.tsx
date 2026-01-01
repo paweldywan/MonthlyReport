@@ -38,7 +38,7 @@ const AppModal = ({
                 {header}
             </DialogTitle>
 
-            <DialogContent>
+            <DialogContent sx={{ pt: 3, overflow: 'visible' }}>
                 {children}
             </DialogContent>
 
