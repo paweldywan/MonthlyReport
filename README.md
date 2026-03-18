@@ -6,7 +6,7 @@ A full-stack web application for tracking, managing, and exporting monthly work 
 
 ## Live Application
 
-**https://monthlyreport.paweldywandev.com/**
+**https://monthlyreport.paweldywan.com/**
 
 ---
 
@@ -67,7 +67,7 @@ MonthlyReport/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/paweldywandev/MonthlyReport.git
+   git clone https://github.com/dev/MonthlyReport.git
    cd MonthlyReport
    ```
 
@@ -206,7 +206,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Author
 
 **Pawel Dywan**
-- Website: [paweldywandev.com](https://paweldywandev.com/)
+- Website: [paweldywan.com](https://paweldywan.com/)
 - GitHub: [@paweldywandev](https://github.com/paweldywandev)
 
 ## Acknowledgments
