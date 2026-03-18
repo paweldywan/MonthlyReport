@@ -6,7 +6,7 @@ A full-stack web application for tracking, managing, and exporting monthly work 
 
 ## Live Application
 
-**https://monthlyreport.paweldywan.com/**
+**https://monthlyreport.paweldywandev.com/**
 
 ---
 
@@ -67,7 +67,7 @@ MonthlyReport/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/paweldywan/MonthlyReport.git
+   git clone https://github.com/paweldywandev/MonthlyReport.git
    cd MonthlyReport
    ```
 
@@ -206,8 +206,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Author
 
 **Pawel Dywan**
-- Website: [paweldywan.com](https://paweldywan.com/)
-- GitHub: [@paweldywan](https://github.com/paweldywan)
+- Website: [paweldywandev.com](https://paweldywandev.com/)
+- GitHub: [@paweldywandev](https://github.com/paweldywandev)
 
 ## Acknowledgments
 
@@ -215,3 +215,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Uses modern .NET 9 features
 - Razor Pages for server-side rendering
 - Clean architecture principles
+
