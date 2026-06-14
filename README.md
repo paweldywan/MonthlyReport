@@ -207,7 +207,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Pawel Dywan**
 - Website: [paweldywan.com](https://paweldywan.com/)
-- GitHub: [@paweldywandev](https://github.com/paweldywandev)
+- GitHub: [@paweldywan](https://github.com/paweldywan)
 
 ## Acknowledgments
 
